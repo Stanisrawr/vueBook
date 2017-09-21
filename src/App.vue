@@ -10,14 +10,15 @@
         <h3>Add a book</h3>
       </div>
       <div class="panel-body">
-        <form id="form" class="form-inline">
+        <form id="form" class="form-inline" v-on:submit.prevent="addBook">
             <div class="form-group">
               <label for="bookTitle">Title:</label>
-              <input type="text" id="bookTitle" value="">
+              <input type="text" id="bookTitle" v-model="newBook.title" value="">
               <label for="bookAuthor">Author:</label>
-              <input type="text" id="bookAuthor" value="">
+              <input type="text" id="bookAuthor" v-model="newBook.Author" value="">
               <label for="bookURL">Url:</label>
-              <input type="text" id="bookURL" value="">
+              <input type="text" id="bookURL" v-model="newBook.url" value="">
+              <input type="submit" value="addBook"> 
             </div>
         </form>
       </div>
@@ -84,8 +85,18 @@ export default {
         url: ''
       }
     }
+  },
+ methods: {
+addBook: function()
+  {
+    booksRef.push(this.newBook)
+    this.newBook.title=''
+    this.newBook.Author=''
+    this.newBook.url=''
+  }
   }
 }
+
 </script>
 
 <style>
@@ -95,6 +106,6 @@ export default {
 
 
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 </style>
